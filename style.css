@@ -1,0 +1,100 @@
+body {
+            font-family: 'Orbitron', sans-serif;
+            background: #0f172a; /* Dark blue-slate background */
+            background-image: radial-gradient(circle at top right, rgba(12, 74, 110, 0.5), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.3), transparent 50%);
+        }
+
+        /* --- Neon Glow & Glassmorphism --- */
+        .glass-container {
+            background: rgba(15, 23, 42, 0.6); /* Semi-transparent dark bg */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 40px rgba(14, 165, 233, 0.2);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 
+                         0 0 10px rgba(56, 189, 248, 0.5), 
+                         0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        
+        /* --- Player Icons (X and O) --- */
+        .icon-x, .icon-o {
+            width: 70%;
+            height: 70%;
+            stroke-width: 8;
+            fill: none;
+            animation: draw-in 0.5s ease-in-out forwards;
+        }
+        .icon-x {
+            stroke: #0ea5e9; /* Neon Blue */
+            filter: drop-shadow(0 0 5px #0ea5e9);
+        }
+        .icon-o {
+            stroke: #d946ef; /* Neon Pink */
+            filter: drop-shadow(0 0 5px #d946ef);
+        }
+        
+        @keyframes draw-in {
+            from {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 1000;
+            }
+            to {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* --- Game Board and Cells --- */
+        .cell {
+            border: 2px solid rgba(56, 189, 248, 0.3);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .cell:not(.x):not(.o):hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.7);
+        }
+        .cell.x, .cell.o {
+            cursor: not-allowed;
+        }
+
+        /* --- Winning Line Animation --- */
+        .win {
+            background-color: rgba(74, 222, 128, 0.2) !important;
+        }
+        .win .icon-x, .win .icon-o {
+            animation: pulse-glow 1s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px currentColor); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px currentColor); transform: scale(1.05); }
+        }
+
+        /* --- Buttons --- */
+        .btn-neon {
+            border: 2px solid #0ea5e9;
+            color: #0ea5e9;
+            text-shadow: 0 0 2px #0ea5e9;
+            transition: all 0.3s ease;
+        }
+        .btn-neon:hover {
+            background-color: #0ea5e9;
+            color: #0f172a;
+            box-shadow: 0 0 20px #0ea5e9;
+            text-shadow: none;
+        }
+        .btn-active {
+            background-color: #0ea5e9 !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 20px #0ea5e9 !important;
+            text-shadow: none !important;
+        }
+        
+        .board-disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
